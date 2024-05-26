@@ -6,6 +6,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 const routes: Routes = [
+  {path: '',redirectTo: '/shops',pathMatch: 'full'},
   { path: 'shops', component: ShopComponent },
   {
     path: 'auth',
