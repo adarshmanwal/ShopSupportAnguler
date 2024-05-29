@@ -1,0 +1,31 @@
+<div>
+  <div *ngIf="!selectedUsertype" class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="flex space-x-4">
+      <a [routerLink]="['signin']" (click)="onselectUser('admin')">
+        <div
+          class="bg-white p-12 rounded-lg shadow-lg transform transition duration-300 hover:scale-150 hover:shadow-2xl"
+        >
+          <h2 class="text-xl font-bold mb-2">Admin</h2>
+        </div>
+      </a>
+      <a [routerLink]="['signin']" (click)="onselectUser('admin')">
+        <div
+          class="bg-white p-12 rounded-lg shadow-lg transform transition duration-300 hover:scale-150 hover:shadow-2xl"
+        >
+          <h2 class="text-xl font-bold mb-2">Shop worker</h2>
+        </div>
+      </a>
+      <a
+        [routerLink]="['signin']"
+        (click)="onselectUser('admin')"
+      >
+        <div
+          class="bg-white p-12 rounded-lg shadow-lg transform transition duration-300 hover:scale-150 hover:shadow-2xl"
+        >
+          <h2 class="text-xl font-bold mb-2">Customer</h2>
+        </div>
+      </a>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
