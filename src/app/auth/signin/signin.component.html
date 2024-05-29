@@ -1,4 +1,5 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <app-loading-spinne *ngIf="isLoading"></app-loading-spinne>
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
     <form class="space-y-6" (ngSubmit)="onsubmit(authform)" #authform="ngForm">
       <div>
@@ -64,6 +65,7 @@
       <a
         href="#"
         class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+        [routerLink]="['/auth/signup']"
         >sign up</a
       >
     </p>

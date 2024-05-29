@@ -9,22 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent {
-
+  isLoading: boolean = false
   constructor(private auth: AuthService,private router: Router){}
   onsubmit(form: NgForm) {
     // if (!form.valid) {
     //   return;
     // }
-    // this.isLoading = true;
+    this.isLoading = true;
     const email = form.value.email;
     const password = form.value.password;
-    if(this.auth.login(email,password))
-      {
-        this.router.navigate(['/shops'])
-      }
-    else{
-      console.log('Invalid cred')
-    }
+    this.auth.login(email,password).subscribe(response =>{
+      console.log("==============>",response)
+      this.isLoading = false;
+      this.router.navigate(['/shops'])
+    })
+    // if(this.auth.login(email,password))
+    //   {
+    //     this.router.navigate(['/shops'])
+    //   }
+    // else{
+    //   console.log('Invalid cred')
+    // }
     // if (this.isLoginMode) {
     //   this.authObs = this.authService.login(email, password);
     // } else {

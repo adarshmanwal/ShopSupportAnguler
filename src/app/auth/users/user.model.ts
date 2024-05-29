@@ -3,9 +3,7 @@ export class User {
     public id: number,
     public email: string,
     public name: string,
-    public userType: string,
-    // private _token: string,
-    // private _tokenExpireationDate
+    public userType: number,
   ) {}
 
   // get token() {
