@@ -9,11 +9,19 @@ export interface AuthResponseData {
   id: number;
   email: string;
   name: string;
-  userType: number;
+  usertype: number;
   // refreshToken: string;
   // expiresIn: string;
   // localId: string;
   // registered?: string;
+}
+
+interface UserData {
+  email: string;
+  id: number;
+  name: string;
+  token: string;
+  userType: number;
 }
 
 @Injectable({
@@ -65,6 +73,28 @@ export class AuthService {
     console.log(this.currentusertype);
     return this.currentusertype;
   }
+  autoLogin() {
+    const userData: {
+      email: string;
+      name: string;
+      id: string;
+      token: string;
+      usertype: string;
+    } = JSON.parse(localStorage.getItem('userData') || '{}');
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      parseInt(userData.id),
+      userData.email,
+      userData.name,
+      parseInt(userData.usertype)
+    );
+    if (userData.token) {
+      this.user.next(loadedUser);
+    }
+  }
+
   signup(name: string, email: string, password: string, usertype?: number) {
     return this.http
       .post<AuthResponseData>('http://localhost:3000/users/register', {
@@ -81,7 +111,7 @@ export class AuthService {
             resData.id,
             resData.email,
             resData.name,
-            resData.userType
+            resData.usertype
           );
           // const newuser = new User(user.id, user.email, user.name, user.userType);
         })
@@ -101,7 +131,7 @@ export class AuthService {
             resData.id,
             resData.email,
             resData.name,
-            resData.userType
+            resData.usertype
           );
           // const newuser = new User(user.id, user.email, user.name, user.userType);
         })
