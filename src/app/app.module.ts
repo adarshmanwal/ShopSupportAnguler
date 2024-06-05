@@ -11,6 +11,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoadingSpinneComponent } from './shared/loading-spinne/loading-spinne.component';
+import { LeftNavComponent } from './shared/left-nav/left-nav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { LoadingSpinneComponent } from './shared/loading-spinne/loading-spinne.c
     AuthComponent,
     SigninComponent,
     SignUpComponent,
-    LoadingSpinneComponent
+    LoadingSpinneComponent,
+    LeftNavComponent
   ],
   imports: [
     BrowserModule,

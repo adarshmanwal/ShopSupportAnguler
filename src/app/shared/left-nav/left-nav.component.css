@@ -1,0 +1,10 @@
+/* Add transition to all elements inside the nav for smoother collapse effect */
+.bg-gray-800 * {
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .collapsed span {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  

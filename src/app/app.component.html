@@ -6,9 +6,14 @@
   <title>Document</title>
 </head>
 <body>
-  <app-header></app-header>
-  <div>
-    <router-outlet></router-outlet>
+  <div *ngIf="showHeader">
+    <app-header></app-header>
+  </div>
+  <div class="flex">
+    <app-left-nav></app-left-nav>
+    <div class="flex-1 bg-white">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </body>
 </html>
