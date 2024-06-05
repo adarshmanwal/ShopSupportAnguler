@@ -2,7 +2,6 @@
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
         <button
           type="button"
           class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -43,9 +42,7 @@
           </svg>
         </button>
       </div>
-      <div
-        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
-      >
+      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">
           <img
             class="h-8 w-auto"
@@ -55,7 +52,6 @@
         </div>
         <div class="sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a
               href="#"
               class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
@@ -66,9 +62,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-      >
+      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <button
           type="button"
           class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -84,39 +78,24 @@
             id="user-menu-button"
             aria-expanded="false"
             aria-haspopup="true"
+            (click)="toggleDropdown()"
           >
             <span class="sr-only">Open user menu</span>
-            <img
-              class="h-8 w-8 rounded-full"
-              src="{{ user.profileImageUrl }}"
-              alt="User profile"
-            />
+            <!-- User profile icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 4a2 2 0 110-4 2 2 0 010 4zM4 10a6 6 0 1112 0v1.6c0 .745-.41 1.432-1.034 1.763a8.059 8.059 0 00-4.932 0A2 2 0 016 11.6V10zm6 10a9.98 9.98 0 01-5.251-1.4 2.005 2.005 0 00-1.498-2.445A8.061 8.061 0 0110 16c2.13 0 4.075-.83 5.75-2.145a2.005 2.005 0 00-1.498-2.445A9.982 9.982 0 0110 20z" clip-rule="evenodd"/>
+            </svg>
           </button>
 
           <!-- Dropdown menu -->
           <div
+            *ngIf="isDropdownOpen"
             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="user-menu-button"
             tabindex="-1"
           >
-            <a
-              href="#"
-              class="block px-4 py-2 text-sm text-gray-700"
-              role="menuitem"
-              tabindex="-1"
-              id="user-name"
-              >{{ user.name }}</a
-            >
-            <a
-              href="#"
-              class="block px-4 py-2 text-sm text-gray-700"
-              role="menuitem"
-              tabindex="-1"
-              id="user-email"
-              >{{ user.email }}</a
-            >
             <a
               href="#"
               class="block px-4 py-2 text-sm text-gray-700"

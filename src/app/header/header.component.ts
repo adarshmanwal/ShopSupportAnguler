@@ -11,6 +11,7 @@ import { User } from '../auth/users/user.model';
 export class HeaderComponent implements OnInit {
   isAuthenticated = false;
   user: any = null
+  isDropdownOpen = false;
   constructor(private router: Router,private auth: AuthService){}
   ngOnInit(): void {
       this.auth.user.subscribe(user =>{
@@ -19,6 +20,9 @@ export class HeaderComponent implements OnInit {
         console.log(user)
         console.log(this.isAuthenticated)
       })
+  }
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
   onclicktologin(){
     this.router.navigate(['/auth'])

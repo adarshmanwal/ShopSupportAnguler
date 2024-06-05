@@ -1,10 +1,17 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
+  purge: ['./src/**/*.{html,ts,css,scss,sass,less,styl}'],
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        'width': 'width'
+      }
+    }
+  },
+  variants: {
+    extend: {
+      width: ['hover']
+    }
   },
   plugins: [],
 }
