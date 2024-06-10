@@ -16,6 +16,7 @@ import { CreateShopComponent } from './shop/create-shop/create-shop.component';
 import { ListShopsComponent } from './shop/list-shops/list-shops.component';
 import { NotificationComponent } from './shared/notification/notification.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     LeftNavComponent,
     CreateShopComponent,
     ListShopsComponent,
-    NotificationComponent
+    NotificationComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
