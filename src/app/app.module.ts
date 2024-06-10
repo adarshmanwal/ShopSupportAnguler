@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoadingSpinneComponent } from './shared/loading-spinne/loading-spinne.component';
 import { LeftNavComponent } from './shared/left-nav/left-nav.component';
+import { CreateShopComponent } from './shop/create-shop/create-shop.component';
+import { ListShopsComponent } from './shop/list-shops/list-shops.component';
+import { NotificationComponent } from './shared/notification/notification.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +25,10 @@ import { LeftNavComponent } from './shared/left-nav/left-nav.component';
     SigninComponent,
     SignUpComponent,
     LoadingSpinneComponent,
-    LeftNavComponent
+    LeftNavComponent,
+    CreateShopComponent,
+    ListShopsComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +36,7 @@ import { LeftNavComponent } from './shared/left-nav/left-nav.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS,useClass: AuthInterceptorService,multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

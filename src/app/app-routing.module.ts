@@ -4,10 +4,15 @@ import { ShopComponent } from './shop/shop.component';
 import { AuthComponent } from './auth/auth.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { ListShopsComponent } from './shop/list-shops/list-shops.component';
+import { CreateShopComponent } from './shop/create-shop/create-shop.component';
 
 const routes: Routes = [
-  {path: '',redirectTo: '/shops',pathMatch: 'full'},
-  { path: 'shops', component: ShopComponent },
+  {path: '',redirectTo: '/shops/list',pathMatch: 'full'},
+  { path: 'shops', component: ShopComponent,children: [
+    { path: 'list', component: ListShopsComponent },
+    { path: 'create', component: CreateShopComponent },
+  ] },
   {
     path: 'auth',
     component: AuthComponent,

@@ -10,7 +10,9 @@
     <app-header></app-header>
   </div>
   <div class="flex">
-    <app-left-nav></app-left-nav>
+    <div *ngIf="showHeader">
+      <app-left-nav></app-left-nav>
+    </div>
     <div class="flex-1 bg-white">
       <router-outlet></router-outlet>
     </div>

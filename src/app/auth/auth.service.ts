@@ -105,7 +105,6 @@ export class AuthService {
       .pipe(
         // catchError(this.handleError),
         tap((resData) => {
-          console.log('==================>', resData);
           this.HandleAuthentication(
             resData.token,
             resData.id,
