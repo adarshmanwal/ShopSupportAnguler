@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../shop.service';
 import { Shop } from '../shop-model';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/notification/notification.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-shop',
   templateUrl: './create-shop.component.html',
   styleUrls: ['./create-shop.component.css'],
 })
-export class CreateShopComponent {
-  newShop: Shop = new Shop('', '', '', '', '', '', '', '', '', '', '', 0, '', 1); // Set default owner ID
+export class CreateShopComponent implements OnInit {
+  shopForm: FormGroup;
 
   categories: string[] = [
     'Grocery Store', 'Clothing Boutique', 'Electronics Store', 'Bookstore', 'Furniture Store',
@@ -24,20 +26,52 @@ export class CreateShopComponent {
     'Supermarket', 'Discount Store'
   ];
 
-  constructor(private shopService: ShopService,private router: Router,private notificationService: NotificationService) {}
+  constructor(
+    private fb: FormBuilder,
+    private shopService: ShopService,
+    private router: Router,
+    private notificationService: NotificationService,
+    public dialogRef: MatDialogRef<CreateShopComponent>
+  ) {}
 
-  createShop() {
-    this.shopService.createShop(this.newShop).subscribe(
-      (response) => {
-        console.log('Shop created successfully', response);
-        this.notificationService.showSuccess('Shop created successfully')
-        this.router.navigate(['/shops/list'])
-        // Handle success response
-      },
-      (error) => {
-        console.error('Error creating shop', error);
-        // Handle error response
-      }
-    );
+  ngOnInit(): void {
+    this.shopForm = this.fb.group({
+      name: ['', Validators.required],
+      description: [''],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      country: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      openingHours: ['', Validators.required],
+      closingHours: ['', Validators.required],
+      category: ['', Validators.required],
+      rating: [null],
+      images: ['']
+    });
+  }
+
+  onCancel(): void {
+    this.dialogRef.close();
+  }
+
+  createShop(): void {
+    console.log("askdjfa;sdkfjasdfasdf")
+    if (this.shopForm.valid) {
+      const newShop = this.shopForm.value as Shop;
+      this.shopService.createShop(newShop).subscribe(
+        (response) => {
+          console.log('Shop created successfully', response);
+          this.notificationService.showSuccess('Shop created successfully');
+          this.dialogRef.close();
+          this.router.navigate(['/shops']);
+        },
+        (error) => {
+          console.error('Error creating shop', error);
+          // Handle error response
+        }
+      );
+    }
   }
 }

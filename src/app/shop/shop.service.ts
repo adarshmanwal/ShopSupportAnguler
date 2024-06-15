@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Shop } from './shop-model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap, Observable } from 'rxjs';
+import { tap, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShopService {
-  private shop: Shop[] = [];
+  private shops: Shop[] = [];
+  shopUpdated = new Subject<Shop[]>();
   private apiUrl = 'http://localhost:3000/shops';
   private userData: {
     email: string;
@@ -25,28 +26,42 @@ export class ShopService {
     this.userData = JSON.parse(localStorage.getItem('userData') || '{}');
   }
 
-  getAllShops(): Observable<Shop[]> {
+  private getAuthHeaders(): HttpHeaders {
     this.setUserData(); // Ensure userData is up-to-date
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.userData.token}`, // Include the token in the Authorization header
+    return new HttpHeaders({
+      Authorization: `Bearer ${this.userData.token}`,
+      'Content-Type': 'application/json',
     });
+  }
 
+  updateShop(shop: Shop): Observable<Shop> {
+    const headers = this.getAuthHeaders();
+    return this.http.put<Shop>(`${this.apiUrl}/${shop.id}`, shop, { headers });
+  }
+
+  deleteShop(id: number): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
+  }
+
+  getAllShops(): Observable<Shop[]> {
+    const headers = this.getAuthHeaders();
     return this.http.get<Shop[]>(this.apiUrl, { headers }).pipe(
       tap((resData) => {
-        this.shop = resData;
+        this.shops = resData;
+        this.shopUpdated.next([...this.shops]);
       })
     );
   }
 
+  getShopById(id: number): Observable<Shop> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<Shop>(`${this.apiUrl}/${id}`, { headers });
+  }
+
   createShop(shop: Shop): Observable<Shop> {
-    this.setUserData(); // Ensure userData is up-to-date
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userData.token}`,
-      'Content-Type': 'application/json',
-    });
-
+    const headers = this.getAuthHeaders();
+    shop.owner = parseInt(this.userData.id, 10);
     return this.http.post<Shop>(this.apiUrl, shop, { headers });
   }
 }

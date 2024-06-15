@@ -8,7 +8,7 @@ import { ShopComponent } from './shop/shop.component';
 import { AuthComponent } from './auth/auth.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoadingSpinneComponent } from './shared/loading-spinne/loading-spinne.component';
 import { LeftNavComponent } from './shared/left-nav/left-nav.component';
@@ -17,6 +17,10 @@ import { ListShopsComponent } from './shop/list-shops/list-shops.component';
 import { NotificationComponent } from './shared/notification/notification.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ShopDetailsComponent } from './shop/shop-details/shop-details.component';
+import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,13 +34,18 @@ import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.co
     CreateShopComponent,
     ListShopsComponent,
     NotificationComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ShopDetailsComponent,
+    ShopEditComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS,useClass: AuthInterceptorService,multi: true}],
   bootstrap: [AppComponent]
