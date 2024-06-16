@@ -7,24 +7,30 @@
           type="text"
           placeholder="Search for a shop"
           class="p-2 border border-gray-300 rounded-md"
+          [(ngModel)]="filterdShop"
         />
         <button class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700">
           Search
         </button>
       </div>
-      <button class="bg-green-500 text-white p-2 rounded-md hover:bg-green-700" (click)="openCreateShopPopUp()">
+      <button
+        class="bg-green-500 text-white p-2 rounded-md hover:bg-green-700"
+        (click)="openCreateShopPopUp()"
+      >
         Create Shop
       </button>
     </div>
   </div>
   <hr class="my-4" />
-  <div class="mx-auto max-w-2xl px-2 py-8 sm:px-4 sm:py-12 lg:max-w-7xl lg:px-6">
+  <div
+    class="mx-auto max-w-2xl px-2 py-8 sm:px-4 sm:py-12 lg:max-w-7xl lg:px-6"
+  >
     <h2 class="sr-only">Products</h2>
     <div
       class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-6"
     >
-      <div *ngFor="let shop of shops; let i = index">
-        <a [routerLink]="['/shops',shop.id]" class="group">
+      <div *ngFor="let shop of shops | searchfilter:filterdShop:'name'; let i = index">
+        <a [routerLink]="['/shops', shop.id]" class="group">
           <div
             class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7"
           >

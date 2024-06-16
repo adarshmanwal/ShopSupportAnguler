@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ShopDetailsComponent } from './shop/shop-details/shop-details.component';
 import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
+import { SearchfilterPipe } from './shared/filters/searchfilter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
     PageNotFoundComponent,
     ShopDetailsComponent,
     ShopEditComponent,
+    SearchfilterPipe,
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { CreateShopComponent } from '../create-shop/create-shop.component';
 })
 export class ListShopsComponent {
   shops: Shop[] = []
+  filterdShop: string = ''
   constructor(private shopService: ShopService,private dialog: MatDialog){}
   ngOnInit(): void {
     this.shopService.getAllShops().subscribe(response =>{
