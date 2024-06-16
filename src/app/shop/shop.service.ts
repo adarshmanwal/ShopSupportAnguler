@@ -59,9 +59,22 @@ export class ShopService {
     return this.http.get<Shop>(`${this.apiUrl}/${id}`, { headers });
   }
 
-  createShop(shop: Shop): Observable<Shop> {
+  createShop(shop: FormData): Observable<Shop> {
     const headers = this.getAuthHeaders();
-    shop.owner = parseInt(this.userData.id, 10);
     return this.http.post<Shop>(this.apiUrl, shop, { headers });
+  }
+
+  uploadFiles(formData: FormData): Observable<string[]> {
+    const HttpUploadOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.userData.token}`
+      }),
+    };
+  
+    return this.http.post<string[]>(
+      `${this.apiUrl}/upload`,
+      formData,
+      HttpUploadOptions
+    );
   }
 }

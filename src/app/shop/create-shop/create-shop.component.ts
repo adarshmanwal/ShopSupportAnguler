@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../shop.service';
-import { Shop } from '../shop-model';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/notification/notification.service';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -13,6 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateShopComponent implements OnInit {
   shopForm: FormGroup;
+  selectedFiles: File[] = [];
+  image: any
 
   categories: string[] = [
     'Grocery Store', 'Clothing Boutique', 'Electronics Store', 'Bookstore', 'Furniture Store',
@@ -52,26 +53,40 @@ export class CreateShopComponent implements OnInit {
     });
   }
 
+  onFileChange(event: any): void {
+    console.log(event.target.files.length > 0)
+    {
+      const file = event.target.files[0]
+      this.image = file
+    }
+  }
+
   onCancel(): void {
     this.dialogRef.close();
   }
 
   createShop(): void {
-    console.log("askdjfa;sdkfjasdfasdf")
-    if (this.shopForm.valid) {
-      const newShop = this.shopForm.value as Shop;
-      this.shopService.createShop(newShop).subscribe(
-        (response) => {
-          console.log('Shop created successfully', response);
-          this.notificationService.showSuccess('Shop created successfully');
-          this.dialogRef.close();
-          this.router.navigate(['/shops']);
-        },
-        (error) => {
-          console.error('Error creating shop', error);
-          // Handle error response
-        }
-      );
+    if (true) {
+      const shopData = this.shopForm.value;
+      const formData = new FormData()
+      formData.append('images',this.image)
+
+      this.shopService.uploadFiles(formData).subscribe(res =>{
+        console.log("file uploaded sucessfully",res)
+      })
+
+      // this.shopService.createShop(formData).subscribe(
+      //   (response) => {
+      //     console.log('Shop created successfully', response);
+      //     this.notificationService.showSuccess('Shop created successfully');
+      //     this.dialogRef.close();
+      //     this.router.navigate(['/shops']);
+      //   },
+      //   (error) => {
+      //     console.error('Error creating shop', error);
+      //     // Handle error response
+      //   }
+      // );
     }
   }
 }
