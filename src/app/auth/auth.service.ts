@@ -58,21 +58,10 @@ export class AuthService {
       usertype: 'Customer',
     },
   ];
-  private currentusertype: string;
 
   constructor(private router: Router, private http: HttpClient) {
-    this.currentusertype = '';
   }
 
-  setcurrentUsertype(usertype: string): string {
-    this.currentusertype = usertype;
-    return this.currentusertype;
-  }
-
-  getcurrentUsertype(): string {
-    console.log(this.currentusertype);
-    return this.currentusertype;
-  }
   autoLogin() {
     const userData: {
       email: string;
@@ -136,23 +125,7 @@ export class AuthService {
         })
       );
   }
-  // private handleError(errorResponse: HttpErrorResponse) {
-  //   console.log(errorResponse);
-  //   let errormessage = 'An error occured!';
-  //   if (!errorResponse.error || !errorResponse.error.error) {
-  //     return throwError(errormessage);
-  //   }
-  //   switch (errorResponse.error.error.message) {
-  //     case 'EMAIL_EXISTS':
-  //       errormessage = 'This email exisits already';
-  //     case 'INVALID_LOGIN_CREDENTIALS':
-  //       errormessage = 'INVALID_PASSWORD';
-  //     case 'EMAIL_NOT_FOUND':
-  //       errormessage = 'EMAIL_NOT_FOUND';
-  //   }
-  //   return throwError(errormessage);
-  // }
-
+  
   private HandleAuthentication(
     token: string,
     id: number,
@@ -160,10 +133,8 @@ export class AuthService {
     name: string,
     userType: number
   ) {
-    // const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
     const newuser = new User(id, email, name, userType);
     this.user.next(newuser);
-    // this.autoLogout(parseInt(expiresIn) * 1000);
     const userData = {
       ...newuser,
       token: token,

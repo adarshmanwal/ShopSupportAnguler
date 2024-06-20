@@ -15,7 +15,7 @@ export class ListShopsComponent {
   constructor(private shopService: ShopService,private dialog: MatDialog){}
   ngOnInit(): void {
     this.shopService.getAllShops().subscribe(response =>{
-      this.shops = response
+      this.shops = response 
       console.log(this.shops)
     })
   }

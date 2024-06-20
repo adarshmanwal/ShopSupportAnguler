@@ -18,7 +18,7 @@
 <h1 mat-dialog-title>Create New Shop</h1>
 <div mat-dialog-content class="custom-dialog-content">
   <div class="max-w-2xl mx-auto p-6 bg-white">
-    <form [formGroup]="shopForm" (ngSubmit)="createShop()">
+    <form [formGroup]="shopForm" (ngSubmit)="onCreateShop()">
       <div class="mb-4">
         <label class="block text-gray-700">Name</label>
         <input type="text" formControlName="name" class="mt-1 p-2 border border-gray-300 rounded w-full" required>
