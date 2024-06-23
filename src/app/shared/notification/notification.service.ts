@@ -10,7 +10,7 @@ export interface Notification {
   providedIn: 'root'
 })
 export class NotificationService {
-  notificationSubject = new BehaviorSubject<Notification | null>(null);
+  notificationSubject = new Subject<Notification>();
   // notifications$ = this.notificationSubject.asObservable();
 
   showSuccess(message: string) {

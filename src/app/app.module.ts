@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ShopDetailsComponent } from './shop/shop-details/shop-details.component';
 import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
 import { SearchfilterPipe } from './shared/filters/searchfilter.pipe';
+import { NotificationService } from './shared/notification/notification.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,7 @@ import { SearchfilterPipe } from './shared/filters/searchfilter.pipe';
     MatDialogModule,
     ReactiveFormsModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS,useClass: AuthInterceptorService,multi: true}],
+  providers: [NotificationService,{provide: HTTP_INTERCEPTORS,useClass: AuthInterceptorService,multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

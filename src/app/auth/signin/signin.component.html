@@ -1,7 +1,7 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <app-loading-spinne *ngIf="isLoading"></app-loading-spinne>
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" (ngSubmit)="onsubmit(authform)" #authform="ngForm">
+    <form class="space-y-6" [formGroup]="signinForm" (ngSubmit)="onsubmit()">
       <div>
         <label
           for="email"
@@ -13,12 +13,11 @@
             id="email"
             name="email"
             type="email"
-            autocomplete="email"
-            ngModel
+            formControlName="email"
             email
-            required
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
+          <span *ngIf="!signinForm.get('email')?.valid && signinForm.get('email')?.touched" > please enter the valid email</span>
         </div>
       </div>
       <div>
@@ -41,10 +40,10 @@
             id="password"
             name="password"
             type="password"
+            formControlName="password"
             autocomplete="current-password"
             required
             ngModel
-            required
             minlength="4"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />

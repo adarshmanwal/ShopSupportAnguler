@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, catchError, tap } from 'rxjs';
+import { BehaviorSubject, Subject, catchError, tap, throwError } from 'rxjs';
 import { User } from './users/user.model';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { NotificationService } from '../shared/notification/notification.service';
 
 export interface AuthResponseData {
   token: string;
@@ -10,18 +11,6 @@ export interface AuthResponseData {
   email: string;
   name: string;
   usertype: number;
-  // refreshToken: string;
-  // expiresIn: string;
-  // localId: string;
-  // registered?: string;
-}
-
-interface UserData {
-  email: string;
-  id: number;
-  name: string;
-  token: string;
-  userType: number;
 }
 
 @Injectable({
@@ -29,38 +18,8 @@ interface UserData {
 })
 export class AuthService {
   user = new BehaviorSubject<User | null>(null);
-  private users: {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    usertype: string;
-  }[] = [
-    {
-      id: 1,
-      name: 'adarsh',
-      email: 'adarsh@gmail.com',
-      password: 'admin123',
-      usertype: 'Admin',
-    },
-    {
-      id: 2,
-      name: 'adarsh',
-      email: 'king@gmail.com',
-      password: 'worker123',
-      usertype: 'Shop worker',
-    },
-    {
-      id: 3,
-      name: 'adarsh',
-      email: 'sing@gmail.com',
-      password: 'customer123',
-      usertype: 'Customer',
-    },
-  ];
 
-  constructor(private router: Router, private http: HttpClient) {
-  }
+  constructor(private router: Router, private http: HttpClient,private notificationService: NotificationService) {}
 
   autoLogin() {
     const userData: {
@@ -92,7 +51,7 @@ export class AuthService {
         password: password,
       })
       .pipe(
-        // catchError(this.handleError),
+        catchError(this.handleError),
         tap((resData) => {
           this.HandleAuthentication(
             resData.token,
@@ -101,7 +60,7 @@ export class AuthService {
             resData.name,
             resData.usertype
           );
-          // const newuser = new User(user.id, user.email, user.name, user.userType);
+          this.notificationService.showSuccess('Sign up successFull')
         })
       );
   }
@@ -112,7 +71,7 @@ export class AuthService {
         password: password,
       })
       .pipe(
-        // catchError(this.handleError),
+        catchError(this.handleError),
         tap((resData) => {
           this.HandleAuthentication(
             resData.token,
@@ -121,11 +80,31 @@ export class AuthService {
             resData.name,
             resData.usertype
           );
-          // const newuser = new User(user.id, user.email, user.name, user.userType);
+          this.notificationService.showSuccess('Login successFull')
         })
       );
   }
-  
+
+  private handleError(errorRes: any) {
+    // Handle the error and provide feedback to the user
+    let errorMessage = 'An unknown error occurred!';
+    if (!errorRes.error || !errorRes.error.error) {
+      return throwError(errorMessage);
+    }
+    switch (errorRes.error.error) {
+      case 'Validation error':
+        errorMessage = 'This email exists already';
+        break;
+      case 'EMAIL_NOT_FOUND':
+        errorMessage = 'This email does not exist';
+        break;
+      case 'Invalid credentials':
+        errorMessage = 'This password is not correct';
+        break;
+    }
+    return throwError(errorMessage);
+  }
+
   private HandleAuthentication(
     token: string,
     id: number,
