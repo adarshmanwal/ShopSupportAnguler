@@ -125,6 +125,7 @@ export class CreateShopComponent implements OnInit {
         .subscribe((createShopResponse) => {
           console.log('Shop created successfully', createShopResponse);
           this.notificationService.showSuccess('Shop created successfully');
+          this.shopService.shopUpdated.next(null)
           this.dialogRef.close();
           this.router.navigate(['/shops']);
         });

@@ -14,6 +14,7 @@ export class AuthInterceptorService implements HttpInterceptor {
                 console.log("-========= error in interceptor",err)
                 if(err.error && err.status == 400)
                     {
+                        console.log("========")
                         this.auth.logout()
                         this.router.navigate(['auth/signin'])
                     }

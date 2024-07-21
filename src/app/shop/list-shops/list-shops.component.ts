@@ -14,6 +14,9 @@ export class ListShopsComponent {
   filterdShop: string = ''
   constructor(private shopService: ShopService,private dialog: MatDialog){}
   ngOnInit(): void {
+    this.shopService.shopUpdated.subscribe(()=>{ 
+      this.shops = this.shopService.shops
+    })
     this.shopService.getAllShops().subscribe(response =>{
       this.shops = response 
       console.log(this.shops)

@@ -7,8 +7,8 @@ import { tap, Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class ShopService {
-  private shops: Shop[] = [];
-  shopUpdated = new Subject<Shop[]>();
+  public shops: Shop[] = [];
+  shopUpdated = new Subject();
   private apiUrl = 'http://localhost:3000/shops';
   private userData: {
     email: string;
@@ -49,7 +49,6 @@ export class ShopService {
     return this.http.get<Shop[]>(this.apiUrl, { headers }).pipe(
       tap((resData) => {
         this.shops = resData;
-        this.shopUpdated.next([...this.shops]);
       })
     );
   }
@@ -61,7 +60,9 @@ export class ShopService {
 
   createShop(shop: FormData): Observable<Shop> {
     const headers = this.getAuthHeaders();
-    return this.http.post<Shop>(this.apiUrl, shop, { headers });
+    return this.http.post<Shop>(this.apiUrl, shop, { headers }).pipe(tap((resData)=>{
+      this.shops.push(resData)
+    }));
   }
 
   uploadFiles(formData: FormData): Observable<string[]> {
