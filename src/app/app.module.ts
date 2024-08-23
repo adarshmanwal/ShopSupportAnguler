@@ -23,6 +23,7 @@ import { ShopDetailsComponent } from './shop/shop-details/shop-details.component
 import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
 import { SearchfilterPipe } from './shared/filters/searchfilter.pipe';
 import { NotificationService } from './shared/notification/notification.service';
+import { UserComponent } from './user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { NotificationService } from './shared/notification/notification.service'
     ShopDetailsComponent,
     ShopEditComponent,
     SearchfilterPipe,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

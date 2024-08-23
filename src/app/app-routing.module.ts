@@ -9,6 +9,7 @@ import { CreateShopComponent } from './shop/create-shop/create-shop.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { ShopDetailsComponent } from './shop/shop-details/shop-details.component';
 import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'shops/list', pathMatch: 'full' },
@@ -31,6 +32,15 @@ const routes: Routes = [
       { path: 'signin', component: SigninComponent },
       { path: 'signup', component: SignUpComponent },
     ],
+  },
+  {
+    path: 'profile',
+    component: UserComponent,
+    // children: [
+    //   { path: '', redirectTo: 'signin', pathMatch: 'full' },
+    //   { path: 'signin', component: SigninComponent },
+    //   { path: 'signup', component: SignUpComponent },
+    // ],
   },
   {
     path: 'not-found',
