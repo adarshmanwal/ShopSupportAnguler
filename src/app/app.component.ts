@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.currentRoute = this.router.url;
-      console.log(this.currentRoute);
       this.showHeader = this.shouldShowHeader(this.currentRoute);
     });
   }

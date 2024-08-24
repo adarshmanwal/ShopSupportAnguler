@@ -17,8 +17,6 @@ export class HeaderComponent implements OnInit {
       this.auth.user.subscribe(user =>{
         this.isAuthenticated = !!user;
         this.user = user
-        console.log(user)
-        console.log(this.isAuthenticated)
       })
   }
   toggleDropdown() {

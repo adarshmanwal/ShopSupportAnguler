@@ -95,7 +95,6 @@ export class CreateShopComponent implements OnInit {
   }
 
   onFileChange(event: any): void {
-    console.log(event.target.files.length > 0);
     {
       const file = event.target.files[0];
       this.image = file;
@@ -123,7 +122,6 @@ export class CreateShopComponent implements OnInit {
           })
         )
         .subscribe((createShopResponse) => {
-          console.log('Shop created successfully', createShopResponse);
           this.notificationService.showSuccess('Shop created successfully');
           this.shopService.shopUpdated.next(null)
           this.dialogRef.close();

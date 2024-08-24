@@ -7,7 +7,7 @@ import { HttpHeaders,HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/users/profile';
+  private apiUrl = 'http://localhost:3000/users';
   private userData: {
     email: string;
     name: string;
@@ -31,11 +31,15 @@ export class UserService {
 
   getUserData(): Observable<User> {
     const headers = this.getAuthHeaders();
-    return this.http.get<User>(this.apiUrl, { headers }).pipe(
+    return this.http.get<User>(this.apiUrl +"/profile", { headers }).pipe(
       tap((resData) => {
-       console.log("=======",resData)
       })
     );
+  }
+
+  deleteUser(){
+    const headers = this.getAuthHeaders();
+    return this.http.delete(this.apiUrl+"/delete",{headers})
   }
   
 }

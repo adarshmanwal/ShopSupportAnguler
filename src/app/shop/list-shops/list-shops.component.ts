@@ -19,7 +19,6 @@ export class ListShopsComponent {
     })
     this.shopService.getAllShops().subscribe(response =>{
       this.shops = response 
-      console.log(this.shops)
     })
   }
 
