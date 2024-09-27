@@ -78,26 +78,26 @@ export class CreateShopComponent implements OnInit {
       }
     });
     this.shopForm = this.fb.group({
-      name: ['', Validators.required],
-      description: [''],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      country: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      openingHours: ['', Validators.required],
-      closingHours: ['', Validators.required],
-      category: ['', Validators.required],
-      rating: [null],
-      images: [''],
+      name: ['Shop ' + Math.floor(Math.random() * 1000), Validators.required],
+      description: ['A random shop description.'],
+      address: ['123 Random St.', Validators.required],
+      city: ['Random City', Validators.required],
+      state: ['Random State', Validators.required],
+      country: ['Random Country', Validators.required],
+      phone: ['+1234567890', Validators.required],
+      email: ['shop' + Math.floor(Math.random() * 100) + '@example.com', [Validators.required, Validators.email]],
+      openingHours: ['09:00', Validators.required],
+      closingHours: ['18:00', Validators.required],
+      category: [this.categories[Math.floor(Math.random() * this.categories.length)], Validators.required],
+      rating: [(Math.random() * 5).toFixed(1)],
+      images: [null],
     });
   }
 
   onFileChange(event: any): void {
     {
       const file = event.target.files[0];
-      this.image = file;
+      this.image = file ? file : null;
     }
   }
 
@@ -109,7 +109,13 @@ export class CreateShopComponent implements OnInit {
     if (this.shopForm.valid) {
       let shopData = this.shopForm.value;
       const formData = new FormData();
-      formData.append('images', this.image);
+      if (!this.image) {
+        // Set a default image if no image is selected
+        const defaultImage = 'path/to/default-image.jpg'; // Replace with your default image path or blob
+        formData.append('images', defaultImage);
+      } else {
+        formData.append('images', this.image);
+      }
 
       this.shopService
         .uploadFiles(formData)
