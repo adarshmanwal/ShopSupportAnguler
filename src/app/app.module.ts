@@ -24,6 +24,8 @@ import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
 import { SearchfilterPipe } from './shared/filters/searchfilter.pipe';
 import { NotificationService } from './shared/notification/notification.service';
 import { UserComponent } from './user/user.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth-gard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +54,7 @@ import { UserComponent } from './user/user.component';
     MatDialogModule,
     ReactiveFormsModule
   ],
-  providers: [NotificationService,{provide: HTTP_INTERCEPTORS,useClass: AuthInterceptorService,multi: true}],
+  providers: [NotificationService,{provide: HTTP_INTERCEPTORS,useClass: AuthInterceptorService,multi: true},AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

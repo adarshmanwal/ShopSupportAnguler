@@ -85,6 +85,10 @@ export class AuthService {
       );
   }
 
+  isAuthenticated(){
+    this.user
+  }
+
   private handleError(errorRes: any) {
     // Handle the error and provide feedback to the user
     let errorMessage = 'An unknown error occurred!';

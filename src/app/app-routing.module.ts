@@ -10,11 +10,13 @@ import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.co
 import { ShopDetailsComponent } from './shop/shop-details/shop-details.component';
 import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
 import { UserComponent } from './user/user.component';
+import { AuthGuard } from './auth/auth-gard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'shops/list', pathMatch: 'full' },
   {
     path: 'shops',
+    canActivate: [AuthGuard],
     component: ShopComponent,
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
@@ -35,6 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
+    canActivate: [AuthGuard],
     component: UserComponent,
     // children: [
     //   { path: '', redirectTo: 'signin', pathMatch: 'full' },
