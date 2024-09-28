@@ -3,6 +3,8 @@ import { ShopService } from '../shop.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Shop } from '../shop-model';
 import { NotificationService } from 'src/app/shared/notification/notification.service';
+import { CreateproductComponent } from 'src/app/product/createproduct/createproduct.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-shop-details',
@@ -17,7 +19,8 @@ export class ShopDetailsComponent implements OnInit {
     private shopService: ShopService,
     private route: ActivatedRoute,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -29,6 +32,12 @@ export class ShopDetailsComponent implements OnInit {
   }
   editShop(): void {
     this.router.navigate(['edit'],{relativeTo: this.route})
+  }
+
+  openCreateProductPopup(){
+    this.dialog.open(CreateproductComponent,{
+      data: { shopId: this.id } // Pass shopId to the dialog
+    })
   }
 
   deleteShop(): void {

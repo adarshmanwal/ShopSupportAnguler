@@ -26,6 +26,10 @@ import { NotificationService } from './shared/notification/notification.service'
 import { UserComponent } from './user/user.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-gard.service';
+import { ProductComponent } from './product/product.component';
+import { CreateproductComponent } from './product/createproduct/createproduct.component';
+import { ListproductComponent } from './product/listproduct/listproduct.component';
+import { ProductdetailsComponent } from './product/productdetails/productdetails.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +48,10 @@ import { AuthGuard } from './auth/auth-gard.service';
     ShopEditComponent,
     SearchfilterPipe,
     UserComponent,
+    ProductComponent,
+    CreateproductComponent,
+    ListproductComponent,
+    ProductdetailsComponent,
   ],
   imports: [
     BrowserModule,

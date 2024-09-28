@@ -1,0 +1,75 @@
+<style>
+  .custom-dialog {
+    max-width: 90vw;
+    width: 100%;
+    height: auto;
+  }
+  .custom-dialog-content {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .footer-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>
+
+<h1 mat-dialog-title>Create New Shop</h1>
+<div mat-dialog-content class="custom-dialog-content">
+  <div class="max-w-2xl mx-auto p-6 bg-white">
+    <form [formGroup]="productForm">
+      <div class="mb-4">
+        <label class="block text-gray-700">Name</label>
+        <input
+          type="text"
+          formControlName="name"
+          class="mt-1 p-2 border border-gray-300 rounded w-full"
+          required
+        />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Description</label>
+        <textarea
+          formControlName="description"
+          class="mt-1 p-2 border border-gray-300 rounded w-full"
+          rows="3"
+        ></textarea>
+      </div>
+      <div>
+        <label class="block text-gray-700">Rating</label>
+        <input
+          type="number"
+          step="1"
+          formControlName="rating"
+          class="mt-1 p-2 border border-gray-300 rounded w-full"
+        />
+      </div>
+      <div>
+        <label class="block text-gray-700">Price</label>
+        <input
+          type="number"
+          step="1"
+          formControlName="rating"
+          class="mt-1 p-2 border border-gray-300 rounded w-full"
+        />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Images</label>
+        <input type="file" (change)="onFileChange($event)" multiple class="mt-1 p-2 border border-gray-300 rounded w-full">
+      </div>
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          (click)="onProductCreate()"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Create Shop
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div mat-dialog-actions class="footer-actions">
+  <button mat-button (click)="onCancel()">Close</button>
+</div>
