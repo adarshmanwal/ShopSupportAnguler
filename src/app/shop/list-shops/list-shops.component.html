@@ -28,7 +28,7 @@
     <div
       class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-6"
     >
-    <p *ngIf="shops.length === 0"> No shops avilable create a new shop </p>
+      <p *ngIf="shops.length === 0">No shops avilable create a new shop</p>
       <div
         *ngFor="
           let shop of shops | searchfilter : filterdShop : 'name';
